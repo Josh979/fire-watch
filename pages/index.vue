@@ -23,10 +23,12 @@
         <div class="px-6 py-4">
           <div class="font-bold text-lg pb-0 mb-0">{{ fire.Name }}</div>
           <div class="mb-2 text-gray-600">
-            <small>{{ fire.County }} County</small>
+            <small>Last Updated {{ fire.Updated }}</small>
           </div>
           <p>Acres Burned: {{ numberWithCommas(fire.AcresBurned) }}</p>
+          <p>County: {{ fire.County }}</p>
           <p>Containment: {{ fire.PercentContained }}%</p>
+<!--          <p>{{fire}}</p>-->
           <p>
             <a class="text-red-800" :href="fire.Url" target="_blank">More Information</a>
           </p>

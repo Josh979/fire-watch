@@ -13,12 +13,12 @@
       </div>
     </nav>
 
-    <div class="container mx-auto mt-5">
+    <div class="container mx-auto mt-5 ">
       <div
         v-for="(fire,index) in fires"
         v-if="fire.AcresBurned > 0"
         :key="index"
-        class=" flex rounded overflow-hidden shadow-md my-5"
+        class=" flex rounded overflow-hidden shadow-md my-5 bg-white"
       >
         <div class="px-6 py-4">
           <div class="font-bold text-lg pb-0 mb-0">{{ fire.Name }}</div>

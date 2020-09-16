@@ -47,6 +47,7 @@ export default {
   buildModules: [
     // Doc: https://github.com/nuxt-community/nuxt-tailwindcss
     '@nuxtjs/tailwindcss',
+    '@nuxtjs/fontawesome',
   ],
   /*
   ** Nuxt.js modules
@@ -54,13 +55,19 @@ export default {
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
+    '@nuxtjs/proxy',
     '@nuxtjs/pwa',
   ],
   /*
   ** Axios module configuration
   ** See https://axios.nuxtjs.org/options
   */
-  axios: {},
+  axios: {
+    proxy: true
+  },
+  proxy: {
+    '/api/': { target: 'https://www.fire.ca.gov/umbraco/api/IncidentApi/', pathRewrite: {'^/api/': ''}, changeOrigin: true }
+  },
   /*
   ** Build configuration
   ** See https://nuxtjs.org/api/configuration-build/

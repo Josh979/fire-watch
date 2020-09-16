@@ -13,7 +13,7 @@
       </div>
     </nav>
 
-    <div class="container mx-auto mt-5 ">
+    <div class="container mx-auto mt-5 " v-if="fires">
       <div
         v-for="(fire,index) in fires"
         v-if="fire.AcresBurned > 0"
@@ -67,8 +67,6 @@
 </template>
 
 <script>
-import axios from 'axios';
-
 export default {
   data: function () {
     return {
@@ -81,16 +79,15 @@ export default {
     },
     async fetchFires() {
       try {
-        const resp = await axios.get('/api/List?inactive=false');
+        const resp = await this.$axios.get('/api/List?inactive=false');
         this.fires = resp.data;
       } catch (err) {
         // Handle Error Here
-        console.error(err);
       }
     },
   },
   async created() {
-    this.fetchFires();
+    await this.fetchFires();
   }
 
 }

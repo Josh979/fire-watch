@@ -1,10 +1,5 @@
-
+let development = process.env.NODE_ENV !== 'production';
 export default {
-  /*
-  ** Nuxt rendering mode
-  ** See https://nuxtjs.org/api/configuration-mode
-  */
-  mode: 'universal',
   /*
   ** Nuxt target
   ** See https://nuxtjs.org/api/configuration-target
@@ -47,7 +42,6 @@ export default {
   buildModules: [
     // Doc: https://github.com/nuxt-community/nuxt-tailwindcss
     '@nuxtjs/tailwindcss',
-    '@nuxtjs/fontawesome',
     '@nuxtjs/moment',
   ],
   /*
@@ -56,23 +50,25 @@ export default {
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
-    '@nuxtjs/proxy',
     '@nuxtjs/pwa',
+    '@nuxtjs/proxy',
   ],
   /*
   ** Axios module configuration
   ** See https://axios.nuxtjs.org/options
   */
   axios: {
-    proxy: true
+    baseURL: 'http://localhost:3000', // Used as fallback if no runtime config is provided
+    proxy: true,
   },
   proxy: {
-    '/api/': { target: 'https://www.fire.ca.gov/umbraco/api/IncidentApi/', pathRewrite: {'^/api/': ''}, changeOrigin: true }
+    '/api/': { target: 'https://www.fire.ca.gov/umbraco/api/IncidentApi/', pathRewrite: {'^/api/': ''}, changeOrigin: true  }
   },
   /*
   ** Build configuration
   ** See https://nuxtjs.org/api/configuration-build/
   */
   build: {
+    analyze: true
   }
 }

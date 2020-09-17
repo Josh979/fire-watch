@@ -79,7 +79,7 @@ export default {
     },
     async fetchFires() {
       try {
-        const resp = await this.$axios.get('/api/List?inactive=false');
+        const resp = await this.$axios.get('/api/');
         this.fires = resp.data;
       } catch (err) {
         // Handle Error Here

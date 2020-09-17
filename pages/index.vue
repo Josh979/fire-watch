@@ -79,7 +79,7 @@ export default {
     },
     async fetchFires() {
       try {
-        const resp = await this.$axios.get('/api/List?inactive=false');
+        const resp = await this.$axios.get('https://www.fire.ca.gov/umbraco/api/IncidentApi/List?inactive=false');
         this.fires = resp.data;
       } catch (err) {
         // Handle Error Here

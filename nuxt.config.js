@@ -51,24 +51,28 @@ export default {
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     '@nuxtjs/pwa',
-    '@nuxtjs/proxy',
+    // '@nuxtjs/proxy',
   ],
   /*
   ** Axios module configuration
   ** See https://axios.nuxtjs.org/options
   */
   axios: {
-    baseURL: 'http://localhost:3000', // Used as fallback if no runtime config is provided
-    proxy: true,
+    // proxy: true,
   },
-  proxy: {
-    '/api/': { target: 'https://www.fire.ca.gov/umbraco/api/IncidentApi/', pathRewrite: {'^/api/': ''}, changeOrigin: true  }
-  },
+  // proxy: {
+  //   '/api/': {
+  //     target: 'https://www.fire.ca.gov/umbraco/api/IncidentApi/',
+  //     pathRewrite: {
+  //       '^/api/': ''
+  //     },
+  //     changeOrigin: true  }
+  // },
   /*
   ** Build configuration
   ** See https://nuxtjs.org/api/configuration-build/
   */
   build: {
-    analyze: true
+    analyze: !development
   }
 }

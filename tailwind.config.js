@@ -7,7 +7,9 @@
 module.exports = {
   theme: {},
   variants: {},
-  plugins: [],
+  plugins: [
+
+  ],
   future: {
     purgeLayersByDefault: true,
     removeDeprecatedGapUtilities: true,

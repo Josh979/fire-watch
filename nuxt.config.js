@@ -62,7 +62,7 @@ export default {
   },
   proxy: {
     '/api/': {
-      target: 'https://www.fire.ca.gov/umbraco/api/IncidentApi/',
+      target: 'https://www.fire.ca.gov/umbraco/api/IncidentApi/List?inactive=false',
       pathRewrite: {
         '^/api/': ''
       },

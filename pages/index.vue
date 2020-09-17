@@ -15,7 +15,7 @@
       >
         <div class="px-6 py-4 flex-1">
           <div class="font-bold text-lg pb-0 mb-0">{{ fire.Name }}</div>
-          <div class="mb-2 text-gray-600">
+          <div class="mb-2 text-gray-700">
             <small>Last Updated {{ $moment(fire.Updated).format('LT on MM/DD/YYYY') }} | <a class="text-red-900 text-sm underline" :href="fire.Url" target="_blank">More Info</a></small>
           </div>
           <div class="grid grid-cols-3 gap-4">

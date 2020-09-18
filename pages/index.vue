@@ -7,7 +7,7 @@
     </nav>
 
     <div class="container mx-auto mt-5 " v-if="filteredFires">
-      <div class="flex justify-end">
+      <div class="flex justify-center  md:justify-end justify">
         <div class="ml-2">
           <label class="block text-sm">Sort By</label>
           <select class="px-3 py-2 rounded shadow-sm text-gray-900 bg-white border-solid border-2 border-gray-300" v-model="filter">

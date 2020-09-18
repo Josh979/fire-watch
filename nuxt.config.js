@@ -59,6 +59,11 @@ export default {
     '@nuxtjs/pwa',
     '@nuxtjs/proxy',
   ],
+  pwa:{
+    manifest:{
+      theme_color: '#9B2C2C'
+    }
+  },
   /*
   ** Axios module configuration
   ** See https://axios.nuxtjs.org/options

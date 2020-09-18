@@ -2,7 +2,7 @@
   <div>
     <nav class="flex items-center justify-between flex-wrap bg-red-800 p-6 shadow-md">
       <div class="flex items-center flex-shrink-0 text-white mr-6">
-        <span class="font-semibold text-xl tracking-tight">California Fire Watch</span>
+        <span class="font-semibold text-xl tracking-tight"><font-awesome-icon icon="fire" /> California Fire Watch</span>
       </div>
     </nav>
 
@@ -22,11 +22,11 @@
             <div>
               <div class="mb-2">
                 <span class="block font-bold">Acres Burned:</span>
-                {{ numberWithCommas(fire.AcresBurned) }}
+                <font-awesome-icon icon="tree" /> {{ numberWithCommas(fire.AcresBurned) }}
               </div>
               <div class="mb-2">
                 <span class="block font-bold">County:</span>
-                {{ fire.County }}
+                <font-awesome-icon icon="map-marker-alt" /> {{ fire.County }}
               </div>
             </div>
             <div class="col-span-2">
@@ -63,7 +63,7 @@
 export default {
   data: function () {
     return {
-      fires: null
+      fires: null,
     }
   },
   methods: {
@@ -81,7 +81,7 @@ export default {
   },
   async created() {
     await this.fetchFires();
-  }
+  },
 
 }
 </script>

@@ -43,7 +43,13 @@ export default {
     // Doc: https://github.com/nuxt-community/nuxt-tailwindcss
     '@nuxtjs/tailwindcss',
     '@nuxtjs/moment',
+    '@nuxtjs/fontawesome',
   ],
+  fontawesome: {
+    icons: {
+      solid: ['faFire', 'faTree', 'faMapMarkerAlt']
+    }
+  },
   /*
   ** Nuxt.js modules
   */

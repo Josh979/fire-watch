@@ -38,6 +38,12 @@
       </div>
 
     </div>
+    <nav class="flex items-center justify-between flex-wrap bg-red-800 py-3 px-6 shadow-md">
+      <div class="text-white mr-6 text-center">
+          <small>&copy; Josh Mielke</small>
+      </div>
+    </nav>
+
   </div>
 </template>
 

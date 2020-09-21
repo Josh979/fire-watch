@@ -1,4 +1,9 @@
 # fire-watch
+[![Netlify Status](https://api.netlify.com/api/v1/badges/d0f317da-9d93-4268-a3f8-6868be87d5d1/deploy-status)](https://app.netlify.com/sites/heuristic-kirch-80a0b3/deploys)
+
+## About
+This is a simple PWA built with Vue.js and Nuxt.js that displays information about 
+California Wildfires via the CalFire API.
 
 ## Build Setup
 

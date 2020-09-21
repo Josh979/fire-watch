@@ -47,7 +47,7 @@ export default {
   ],
   fontawesome: {
     icons: {
-      solid: ['faFire', 'faTree', 'faMapMarkerAlt']
+      solid: ['faFire', 'faTree', 'faMapMarkerAlt', 'faFireExtinguisher', 'faCalendarAlt']
     }
   },
   /*

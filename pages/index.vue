@@ -1,8 +1,8 @@
 <template>
   <div>
-    <nav class="flex items-center justify-between flex-wrap bg-red-800 p-6 shadow-md">
+    <nav class="flex items-center justify-center md:justify-between flex-wrap bg-red-800 p-4 md:p-6 shadow-md">
       <div class="flex items-center flex-shrink-0 text-white mr-6">
-        <span class="font-semibold text-xl tracking-tight"><font-awesome-icon icon="fire" /> California Fire Watch</span>
+        <span class="font-semibold text-xl tracking-tight"><font-awesome-icon icon="fire" class="" /> California Fire Watch</span>
       </div>
     </nav>
 
@@ -38,7 +38,7 @@
       </div>
 
     </div>
-    <nav class="flex items-center justify-between flex-wrap bg-red-800 py-3 px-6 shadow-md">
+    <nav class="flex items-center md:justify-start justify-center flex-wrap bg-red-800 py-3 px-6 shadow-md">
       <div class="text-white mr-6 text-center">
           <small>&copy; Josh Mielke</small>
       </div>

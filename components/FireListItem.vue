@@ -5,9 +5,9 @@
       <div class="mb-2 text-gray-700">
         <small><font-awesome-icon icon="map-marker-alt" /> {{ fire.County }} | Last Updated {{ $moment(fire.Updated).format('LT on MM/DD/YYYY') }} | <a rel="noopener" :title="`More information on the ${fire.Name}` " class="text-red-900 text-sm underline" :href="fire.Url" target="_blank">More Info</a></small>
       </div>
-      <div class="grid grid-cols-4 md:grid-cols-6">
+      <div class="grid grid-cols-4 sm:grid-cols-6">
         <div class="col-span-4 sm:col-span-2">
-          <div class="flex justify-start md:justify-center ">
+          <div class="flex justify-start sm:justify-center ">
             <div class="text-5xl">
               <font-awesome-icon size="sm" class="text-green-700" fixed-width icon="tree" />
             </div>
@@ -18,7 +18,7 @@
           </div>
         </div>
         <div class="col-span-4 sm:col-span-2">
-          <div class="flex justify-start md:justify-center ">
+          <div class="flex justify-start sm:justify-center ">
             <div class="text-5xl">
               <font-awesome-icon size="sm" class="text-red-700" fixed-width icon="fire-extinguisher" />
             </div>
@@ -28,8 +28,8 @@
             </div>
           </div>
         </div>
-        <div class="col-span-4 md:col-span-2">
-          <div class="flex justify-start md:justify-center ">
+        <div class="col-span-4 sm:col-span-2">
+          <div class="flex justify-start sm:justify-center ">
             <div class="text-5xl">
               <font-awesome-icon size="sm" class="text-orange-600" fixed-width icon="calendar-alt" />
             </div>

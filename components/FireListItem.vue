@@ -5,29 +5,38 @@
       <div class="mb-2 text-gray-700">
         <small><font-awesome-icon icon="map-marker-alt" /> {{ fire.County }} | Last Updated {{ $moment(fire.Updated).format('LT on MM/DD/YYYY') }} | <a rel="noopener" :title="`More information on the ${fire.Name}` " class="text-red-900 text-sm underline" :href="fire.Url" target="_blank">More Info</a></small>
       </div>
-      <div class="grid grid-cols-4 md:grid-cols-6 gap-4">
-        <div class="col-span-2 sm:col-span-2">
-          <div class="mb-2 text-center">
-            <span class="block font-bold">Acres Burned:</span>
-            <span class="text-2xl">
-              <font-awesome-icon class="text-green-700" icon="tree" /> <span class="font-semibold">{{ numberWithCommas(fire.AcresBurned) }}</span>
-            </span>
+      <div class="grid grid-cols-4 md:grid-cols-6">
+        <div class="col-span-4 sm:col-span-2">
+          <div class="flex justify-start md:justify-center ">
+            <div class="text-5xl">
+              <font-awesome-icon size="sm" class="text-green-700" fixed-width icon="tree" />
+            </div>
+            <div class="text-left ml-2 align-center flex flex-col justify-center">
+              <div class="block text-gray-600">Acres Burned</div>
+              <div class="font-semibold">{{numberWithCommas(fire.AcresBurned)}}</div>
+            </div>
           </div>
         </div>
-        <div class="col-span-2 sm:col-span-2">
-          <div class="mb-2 text-center">
-            <span class="block font-bold">Containment:</span>
-            <span class="text-2xl">
-              <font-awesome-icon class="text-red-700" icon="fire-extinguisher" /> <span class="font-semibold">{{ fire.PercentContained }}%</span>
-            </span>
+        <div class="col-span-4 sm:col-span-2">
+          <div class="flex justify-start md:justify-center ">
+            <div class="text-5xl">
+              <font-awesome-icon size="sm" class="text-red-700" fixed-width icon="fire-extinguisher" />
+            </div>
+            <div class="text-left ml-2 align-center flex flex-col justify-center">
+              <div class="block text-gray-600">Contained</div>
+              <div class="font-semibold">{{ fire.PercentContained }}%</div>
+            </div>
           </div>
         </div>
         <div class="col-span-4 md:col-span-2">
-          <div class="mb-2 text-center">
-            <span class="block font-bold">Time Active:</span>
-            <span class="text-2xl">
-              <font-awesome-icon class="text-red-700" icon="calendar-alt" /> <span class="font-semibold">{{ this.daysActive }} Days</span>
-            </span>
+          <div class="flex justify-start md:justify-center ">
+            <div class="text-5xl">
+              <font-awesome-icon size="sm" class="text-orange-600" fixed-width icon="calendar-alt" />
+            </div>
+            <div class="text-left ml-2 align-center flex flex-col justify-center">
+              <div class="block text-gray-600">Time Active</div>
+              <div class="font-semibold">{{ this.daysActive }} Days</div>
+            </div>
           </div>
         </div>
       </div>

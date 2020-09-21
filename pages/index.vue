@@ -7,21 +7,24 @@
     </nav>
 
     <div class="container mx-auto mt-5 " v-if="filteredFires">
-      <div class="flex justify-center  md:justify-end justify">
-        <div class="ml-2">
-          <label class="block text-sm">Sort By</label>
-          <select class="px-3 py-2 rounded shadow-sm text-gray-900 bg-white border-solid border-2 border-gray-300" v-model="filter">
-            <option value="Name">Name</option>
-            <option value="AcresBurned">Acres Burned</option>
-            <option value="PercentContained">Percent Contained</option>
-          </select>
-        </div>
-        <div class="ml-2">
-          <label class="block text-sm">Order</label>
-          <select class="px-3 py-2 rounded shadow-sm text-gray-900 bg-white border-solid border-2 border-gray-300" v-model="ascending">
-            <option :value="1">Ascending</option>
-            <option :value="0">Descending</option>
-          </select>
+      <div class="flex justify-center sm:justify-end justify">
+        <div class=" gap-2 flex flex-col sm:flex-row w-full sm:w-auto">
+          <div class="px-5 sm:px-0">
+            <label class="block text-sm">Sort By</label>
+            <select class="px-3 py-2 rounded shadow-sm text-gray-900 bg-white border-solid border-2 border-gray-300 w-full" v-model="filter">
+              <option value="Name">Name</option>
+              <option value="AcresBurned">Acres Burned</option>
+              <option value="PercentContained">Percent Contained</option>
+            </select>
+          </div>
+          <div class="px-5 sm:px-0">
+            <label class="block text-sm">Order</label>
+            <select class="px-3 py-2 rounded shadow-sm text-gray-900 bg-white border-solid border-2 border-gray-300 w-full" v-model="ascending">
+              <option :value="1">Ascending</option>
+              <option :value="0">Descending</option>
+            </select>
+          </div>
+
         </div>
       </div>
 

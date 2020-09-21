@@ -65,9 +65,10 @@ export default {
       fileName: 'icon.png'
     },
     manifest:{
-      name: 'Fire Watch',
-      background_color: '#9B2C2C',
-      theme_color: '#9B2C2C'
+      name: 'California Fire Watch',
+      short_name: 'Fire Watch',
+      background_color: '#530000',
+      theme_color: '#530000'
     }
   },
   /*

@@ -61,8 +61,8 @@ export default {
   ],
   pwa:{
     icon:{
-      source: '/static/icon-color.png',
-      fileName: 'icon-color.png'
+      source: '/static/icon.png',
+      fileName: 'icon.png'
     },
     manifest:{
       name: 'Fire Watch',

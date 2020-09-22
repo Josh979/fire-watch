@@ -16,10 +16,10 @@
     "@nuxtjs/moment": "^1.6.1",
     "@nuxtjs/pwa": "^3.0.2",
     "autoprefixer": "^10.0.0",
-    "moment": "^2.28.0",
+    "moment": "^2.29.0",
     "nuxt": "^2.14.6"
   },
   "devDependencies": {
-    "@nuxtjs/tailwindcss": "^2.1.0"
+    "@nuxtjs/tailwindcss": "^3.0.2"
   }
 }

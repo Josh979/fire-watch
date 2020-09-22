@@ -68,14 +68,14 @@ export default {
   ],
   pwa:{
     icon:{
-      source: '/static/icon.png',
-      fileName: 'icon.png'
+      source: '/static/icon-color.png',
+      fileName: 'icon-color.png'
     },
     manifest:{
       name: 'California Fire Watch',
       short_name: 'Fire Watch',
-      background_color: '#530000',
-      theme_color: '#530000'
+      background_color: '#9B1D1D',
+      theme_color: '#9B1D1D'
     }
   },
   /*

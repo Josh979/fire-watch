@@ -3,7 +3,7 @@
 
 ## About
 This is a simple PWA built with Vue.js and Nuxt.js that displays information about 
-California Wildfires via the CalFire API.
+California Wildfires via the NIFC Wildfire API.
 
 ## Build Setup
 

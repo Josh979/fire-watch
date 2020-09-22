@@ -12,8 +12,8 @@
           <div class="px-5 sm:px-0">
             <label class="block text-sm">Sort By</label>
             <select class="px-3 py-2 rounded shadow-sm text-gray-900 bg-white border-solid border-2 border-gray-300 w-full" v-model="filter">
-              <option value="Name">Name</option>
-              <option value="AcresBurned">Acres Burned</option>
+              <option value="IncidentName">Name</option>
+              <option value="TotalAcres">Acres Burned</option>
               <option value="PercentContained">Percent Contained</option>
             </select>
           </div>
@@ -28,10 +28,9 @@
         </div>
       </div>
 
-
       <div
         v-for="(fire,index) in filteredFires"
-        v-if="fire.AcresBurned > 0"
+        v-if="fire.TotalAcres > 1 && fire.PercentPerimeterToBeContained === 100"
         :key="index"
       >
         <FireListItem :fire="fire" ></FireListItem>
@@ -57,7 +56,7 @@ export default {
   data: function () {
     return {
       fires: null,
-      filter: 'Name',
+      filter: 'IncidentName',
       ascending: 1
     }
   },
@@ -65,7 +64,7 @@ export default {
     async fetchFires() {
       try {
         const resp = await this.$axios.get('/api/');
-        this.fires = resp.data;
+        this.fires = resp.data.features;
       } catch (err) {
         // Handle Error Here
       }
@@ -77,7 +76,13 @@ export default {
   computed: {
     filteredFires() {
       if (this.fires !== null){
-        return this.fires.sort((a,b) => {
+        let fireData = [];
+        this.fires.forEach((fire) => {
+          fire.attributes.Geometry = fire.geometry;
+          fire.attributes.TotalAcres = fire.attributes.DailyAcres || fire.attributes.CalculatedAcres || 0;
+          fireData.push(fire.attributes)
+        })
+        return fireData.sort((a,b) => {
           let order = 1;
           if (a[this.filter] > b[this.filter]){
             order = 1;

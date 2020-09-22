@@ -1,11 +1,11 @@
 <template>
   <div class="flex rounded overflow-hidden shadow-md my-5 bg-white">
     <div class="px-6 py-4 flex-1">
-      <div class="font-bold text-xl pb-0 mb-0">{{ fire.Name }}</div>
+      <div class="font-bold text-xl pb-0 mb-0">{{ fire.IncidentName }}</div>
       <div class="mb-2 text-gray-700">
-        <small><font-awesome-icon icon="map-marker-alt" /> {{ fire.County }} | Last Updated {{ $moment(fire.Updated).format('LT on MM/DD/YYYY') }} | <a rel="noopener" :title="`More information on the ${fire.Name}` " class="text-red-900 text-sm underline" :href="fire.Url" target="_blank">More Info</a></small>
+        <small><font-awesome-icon icon="map-marker-alt" /> {{ fire.POOCounty }} | Updated {{ $moment(fire.ModifiedOnDateTime).format('LT on MM/DD/YYYY') }}</small>
       </div>
-      <div class="grid grid-cols-4 sm:grid-cols-6">
+      <div class="grid grid-cols-8 sm:grid-cols-6 md:grid-cols-8 gap-4">
         <div class="col-span-4 sm:col-span-2">
           <div class="flex justify-start sm:justify-center ">
             <div class="text-5xl">
@@ -13,7 +13,7 @@
             </div>
             <div class="text-left ml-2 align-center flex flex-col justify-center">
               <div class="block text-gray-600">Acres Burned</div>
-              <div class="font-semibold">{{numberWithCommas(fire.AcresBurned)}}</div>
+              <div class="font-semibold">{{numberWithCommas(fire.TotalAcres.toFixed(0)) || 0}}</div>
             </div>
           </div>
         </div>
@@ -24,14 +24,25 @@
             </div>
             <div class="text-left ml-2 align-center flex flex-col justify-center">
               <div class="block text-gray-600">Contained</div>
-              <div class="font-semibold">{{ fire.PercentContained }}%</div>
+              <div class="font-semibold">{{ fire.PercentContained || 0 }}%</div>
+            </div>
+          </div>
+        </div>
+        <div v-if="fire.TotalIncidentPersonnel" class="col-span-4 sm:col-span-2">
+          <div class="flex justify-start sm:justify-center ">
+            <div class="text-5xl">
+              <font-awesome-icon size="sm" class="text-orange-700" fixed-width icon="users" />
+            </div>
+            <div class="text-left ml-2 align-center flex flex-col justify-center">
+              <div class="block text-gray-600">Personnel</div>
+              <div class="font-semibold">{{ numberWithCommas(fire.TotalIncidentPersonnel) }}</div>
             </div>
           </div>
         </div>
         <div class="col-span-4 sm:col-span-2">
           <div class="flex justify-start sm:justify-center ">
             <div class="text-5xl">
-              <font-awesome-icon size="sm" class="text-orange-600" fixed-width icon="calendar-alt" />
+              <font-awesome-icon size="sm" class="text-gray-700" fixed-width icon="calendar-alt" />
             </div>
             <div class="text-left ml-2 align-center flex flex-col justify-center">
               <div class="block text-gray-600">Time Active</div>
@@ -58,14 +69,14 @@ export default {
     }
   },
   methods: {
-    numberWithCommas(x) {
-      return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    numberWithCommas(number) {
+      return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     },
   },
   computed:{
     daysActive(){
-      const end = this.$props.fire.ExtinguishedDateOnly ? this.$moment(this.$props.fire.ExtinguishedDateOnly) : this.$moment();
-      const start = this.$moment(this.$props.fire.StartedDateOnly);
+      const end = this.$props.fire.FireOutDateTime ? this.$moment(this.$props.fire.FireOutDateTime) : this.$moment();
+      const start = this.$moment(this.$props.fire.CreatedOnDateTime);
 
       return end.diff(start, 'days')
 

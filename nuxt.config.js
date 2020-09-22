@@ -47,7 +47,14 @@ export default {
   ],
   fontawesome: {
     icons: {
-      solid: ['faFire', 'faTree', 'faMapMarkerAlt', 'faFireExtinguisher', 'faCalendarAlt']
+      solid: [
+        'faFire',
+        'faTree',
+        'faMapMarkerAlt',
+        'faFireExtinguisher',
+        'faCalendarAlt',
+        'faUsers'
+      ]
     }
   },
   /*
@@ -80,7 +87,7 @@ export default {
   },
   proxy: {
     '/api/': {
-      target: 'https://www.fire.ca.gov/umbraco/api/IncidentApi/List?inactive=false',
+      target: 'https://services3.arcgis.com/T4QMspbfLg3qTGWY/arcgis/rest/services/Active_Fires/FeatureServer/0/query?where=POOState%20%3D%20%27US-CA%27%20AND%20IncidentTypeCategory%20%3D%20%27WF%27&outFields=*&outSR=4326&f=json',
       pathRewrite: {
         '^/api/': ''
       },

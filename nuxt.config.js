@@ -30,6 +30,7 @@ export default {
   ** https://nuxtjs.org/guide/plugins
   */
   plugins: [
+    // {src:'@/plugins/vue-pull-to.js', mode:'client'}
   ],
   /*
   ** Auto import components
@@ -53,7 +54,8 @@ export default {
         'faMapMarkerAlt',
         'faFireExtinguisher',
         'faCalendarAlt',
-        'faUsers'
+        'faUsers',
+        'faSync',
       ]
     }
   },

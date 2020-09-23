@@ -63,9 +63,25 @@ export default {
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
+    '@nuxtjs/firebase',
     '@nuxtjs/pwa',
     '@nuxtjs/proxy',
   ],
+  firebase:{
+    config: {
+      apiKey: "AIzaSyAsIhFCa2pLz341nPISN1N3s78rfYbnpX0",
+      authDomain: "california-fire-watch.firebaseapp.com",
+      databaseURL: "https://california-fire-watch.firebaseio.com",
+      projectId: "california-fire-watch",
+      storageBucket: "california-fire-watch.appspot.com",
+      messagingSenderId: "871053439544",
+      appId: "1:871053439544:web:61af9c0a4c63f099f4accd",
+      measurementId: "G-ZHW10D2W6Z"
+    },
+    services: {
+      analytics: true
+    }
+  },
   pwa:{
     icon:{
       source: '/static/icon.png',

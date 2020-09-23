@@ -102,7 +102,7 @@ export default {
         doneText: 'Complete!', // Load the finished text
         failText: 'Failed to Update', // Load failed text
         loadedStayTime: 750, // Time to stay after loading ms
-        stayDistance: 40, // Trigger the distance after the refresh
+        stayDistance: 50, // Trigger the distance after the refresh
         triggerDistance: 70 // Pull down the trigger to trigger the distance
       }
     }

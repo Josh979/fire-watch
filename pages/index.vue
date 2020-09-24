@@ -29,6 +29,8 @@
               <option value="IncidentName">Name</option>
               <option value="TotalAcres">Acres Burned</option>
               <option value="PercentContained">Percent Contained</option>
+              <option value="ModifiedOnDateTime">Last Updated</option>
+              <option value="FireDiscoveryDateTime">Start Date</option>
             </select>
           </div>
           <div class="px-5 sm:px-0">
@@ -82,6 +84,7 @@ export default {
       reloadIcon: 'sync',
       filter: 'IncidentName',
       ascending: 1,
+      updateTime: null,
       updateAvailable: false,
     }
   },

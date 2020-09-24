@@ -21,7 +21,7 @@ export default {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '' }
+      { hid: 'description', name: 'description', content: 'Get the latest information on California Wildfires in a fast, simple format.' }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
@@ -86,7 +86,8 @@ export default {
       measurementId: "G-ZHW10D2W6Z"
     },
     services: {
-      analytics: true
+      analytics: true,
+      performance: true
     }
   },
   pwa:{

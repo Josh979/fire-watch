@@ -61,7 +61,7 @@
 
     <nav class="flex items-center md:justify-start justify-center flex-wrap nav-color py-3 px-6 ">
       <div class="text-white mr-6 text-center">
-        <small>&copy; Josh Mielke</small>
+        <small>&copy; Josh Mielke | v{{appVersion}}</small>
       </div>
     </nav>
 
@@ -123,19 +123,8 @@ export default {
     await this.checkForUpdate();
   },
   computed: {
-    isIdle() {
-      return this.idle;
-    },
-    networkData(){
-      return {
-        isOnline: this.isOnline,
-        offlineAt: this.offlineAt,
-        downlink: this.downlink,
-        downlinkMax: this.downlinkMax,
-        effectiveType: this.effectiveType,
-        saveData: this.saveData,
-        type: this.type
-      }
+    appVersion(){
+      return process.env.APP_VERSION;
     },
     filteredFires() {
       if (this.fires !== null) {

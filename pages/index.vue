@@ -1,14 +1,25 @@
 <template>
   <div>
-    <client-only>
-      <pull-to :topConfig="topConfig" :top-load-method="reloadFires">
-        <nav class="flex items-center justify-center md:justify-between flex-wrap nav-color p-4 md:p-6 shadow-lg">
-          <div class="flex items-center flex-shrink-0 text-white mr-6">
-            <span class="font-semibold text-xl tracking-tight"><font-awesome-icon icon="fire" class=""/> California Fire Watch</span>
-          </div>
-        </nav>
-      </pull-to>
-    </client-only>
+    <nav class="flex items-center justify-between flex-wrap nav-color p-4 md:p-6 shadow-lg">
+      <div class="flex items-center flex-shrink-0 text-white mr-6">
+        <span class="font-semibold text-xl tracking-tight"><font-awesome-icon icon="fire" class=""/> California Fire Watch</span>
+      </div>
+      <div @click="reloadFires">
+        <font-awesome-icon :icon="reloadIcon" class="text-white"/>
+      </div>
+    </nav>
+
+    <div v-if="updateAvailable" class="fixed bottom-0 w-full mx-auto">
+      <div class="flex justify-between rounded overflow-hidden px-5 py-2 bg-gray-200 shadow-inner">
+        <div class="self-center font-semibold py-3 text-gray-700 text-lg">
+          <span>Update Available</span>
+        </div>
+        <div class="self-center">
+          <button @click="updateApp" class="bg-red-800 hover:bg-red-700 focus:bg-red-700 px-4 py-2 rounded text-white shadow-md border-red-900">Refresh</button>
+        </div>
+      </div>
+    </div>
+
 
     <div class="container mx-auto mt-5">
       <div class="flex justify-center sm:justify-end justify">
@@ -46,14 +57,7 @@
 
     </div>
 
-    <div class="container mx-auto mt-5">
-      <div class="rounded overflow-hidden shadow-md my-5 bg-white p-5">
-        <div class="block">User is Idle: {{isIdle}}</div>
-        <div class="block">Device is Online: {{isOnline}}</div>
-        <div v-if="networkData.type !== 'unknown'" class="block">Network Type: {{networkData.type}}</div>
-        <div v-if="networkData.effectiveType" class="block">Speed Type: {{networkData.effectiveType}}</div>
-      </div>
-    </div>
+
 
     <nav class="flex items-center md:justify-start justify-center flex-wrap nav-color py-3 px-6 ">
       <div class="text-white mr-6 text-center">
@@ -67,47 +71,48 @@
 
 <script>
 import FireListItem from "@/components/FireListItem";
-import { useIdle } from '@vueuse/core'
-import { useNetwork } from 'vue-use-web'
 export default {
-  setup() {
-    const { idle, lastActive } = useIdle(10 * 1000) // 10 Seconds
-    const { isOnline, offlineAt, downlink, downlinkMax, effectiveType, saveData, type } = useNetwork();
-
-    return { idle, isOnline, offlineAt, downlink, downlinkMax, effectiveType, saveData, type}
-  },
   name: 'Home',
   components: {
     FireListItem,
-    PullTo: () => import('vue-pull-to')
   },
   data: function () {
     return {
       fires: null,
+      reloadIcon: 'sync',
       filter: 'IncidentName',
       ascending: 1,
-      topConfig: {
-        pullText: 'Pull Down To Refresh', // The text is displayed when you pull down
-        triggerText: 'Release To Refresh', // The text that appears when the trigger distance is pulled down
-        loadingText: 'Updating Data...', // The text in the load
-        doneText: 'Complete!', // Load the finished text
-        failText: 'Failed to Update', // Load failed text
-        loadedStayTime: 750, // Time to stay after loading ms
-        stayDistance: 50, // Trigger the distance after the refresh
-        triggerDistance: 70 // Pull down the trigger to trigger the distance
-      }
+      updateAvailable: false,
     }
   },
   methods: {
-    async reloadFires(loaded) {
+    async checkForUpdate(){
+      if (process.browser){
+        const workbox = await window.$workbox;
+        if (workbox) {
+          workbox.addEventListener('installed', (event) => {
+            if (event.isUpdate) {
+              this.updateAvailable = true;
+              // whatever you want to do to let the user know there's an update available
+            }
+          });
+        }
+      }
+    },
+    updateApp(){
+      window.location.reload();
+    },
+    async reloadFires() {
       await this.fetchFires();
-      loaded('done');
     },
     async fetchFires() {
       try {
+        // this.reloadIcon = 'tree';
         const resp = await this.$axios.get('/api/');
         this.fires = resp.data.features;
         this.updateTime = this.$moment().format('LT on MM/DD/YYYY');
+        // this.reloadIcon = 'sync';
+
       } catch (err) {
         // Handle Error Here
       }
@@ -115,6 +120,7 @@ export default {
   },
   async created() {
     await this.fetchFires();
+    await this.checkForUpdate();
   },
   computed: {
     isIdle() {

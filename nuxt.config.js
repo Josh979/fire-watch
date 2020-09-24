@@ -29,9 +29,7 @@ export default {
   ** Plugins to load before mounting the App
   ** https://nuxtjs.org/guide/plugins
   */
-  plugins: [
-    // {src:'@/plugins/vue-pull-to.js', mode:'client'}
-  ],
+  plugins: [],
   /*
   ** Auto import components
   ** See https://nuxtjs.org/api/configuration-components
@@ -56,6 +54,7 @@ export default {
         'faCalendarAlt',
         'faUsers',
         'faSync',
+        'faBell',
       ]
     }
   },
@@ -86,7 +85,7 @@ export default {
   },
   pwa:{
     icon:{
-      source: '/static/icon.png',
+      source: 'static/icon.png',
       fileName: 'icon.png'
     },
     manifest:{

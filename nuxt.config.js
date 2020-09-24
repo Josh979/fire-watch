@@ -2,7 +2,6 @@ let development = process.env.NODE_ENV !== 'production';
 const fs = require('fs');
 const packageJson = fs.readFileSync('./package.json')
 const version = JSON.parse(packageJson).version || 0;
-console.log(version);
 export default {
   env:{
     APP_VERSION: version

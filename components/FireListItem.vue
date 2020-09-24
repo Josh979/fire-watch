@@ -12,7 +12,7 @@
               <font-awesome-icon size="sm" class="text-green-700" fixed-width icon="tree" />
             </div>
             <div class="text-left ml-2 align-center flex flex-col justify-center">
-              <div class="block text-gray-600">Acres Burned</div>
+              <div class="block text-gray-700">Acres Burned</div>
               <div class="font-semibold">{{numberWithCommas(fire.TotalAcres.toFixed(0)) || 0}}</div>
             </div>
           </div>
@@ -23,7 +23,7 @@
               <font-awesome-icon size="sm" class="text-red-700" fixed-width icon="fire-extinguisher" />
             </div>
             <div class="text-left ml-2 align-center flex flex-col justify-center">
-              <div class="block text-gray-600">Contained</div>
+              <div class="block text-gray-700">Contained</div>
               <div class="font-semibold">{{ fire.PercentContained || 0 }}%</div>
             </div>
           </div>
@@ -34,7 +34,7 @@
               <font-awesome-icon size="sm" class="text-orange-700" fixed-width icon="users" />
             </div>
             <div class="text-left ml-2 align-center flex flex-col justify-center">
-              <div class="block text-gray-600">Personnel</div>
+              <div class="block text-gray-700">Personnel</div>
               <div class="font-semibold">{{ numberWithCommas(fire.TotalIncidentPersonnel) }}</div>
             </div>
           </div>
@@ -45,7 +45,7 @@
               <font-awesome-icon size="sm" class="text-gray-700" fixed-width icon="calendar-alt" />
             </div>
             <div class="text-left ml-2 align-center flex flex-col justify-center">
-              <div class="block text-gray-600">Time Active</div>
+              <div class="block text-gray-700">Time Active</div>
               <div class="font-semibold">{{ this.daysActive }} Days</div>
             </div>
           </div>

@@ -1,6 +1,5 @@
 <template>
   <div>
-
     <client-only>
       <pull-to :topConfig="topConfig" :top-load-method="reloadFires">
         <nav class="flex items-center justify-center md:justify-between flex-wrap nav-color p-4 md:p-6 shadow-lg">
@@ -11,8 +10,7 @@
       </pull-to>
     </client-only>
 
-
-    <div class="container mx-auto mt-5 " v-if="filteredFires">
+    <div class="container mx-auto mt-5">
       <div class="flex justify-center sm:justify-end justify">
         <div class=" gap-2 flex flex-col sm:flex-row w-full sm:w-auto">
           <div class="px-5 sm:px-0">
@@ -33,16 +31,30 @@
 
         </div>
       </div>
-
-      <div
-        v-for="(fire,index) in filteredFires"
-        v-if="fire.TotalAcres > 1 && fire.PercentPerimeterToBeContained === 100"
-        :key="index"
-      >
-        <FireListItem :fire="fire"></FireListItem>
-      </div>
+      <template v-if="filteredFires" >
+        <div
+          v-for="(fire,index) in filteredFires"
+          v-if="fire.TotalAcres > 1 && fire.PercentPerimeterToBeContained === 100"
+          :key="index"
+        >
+          <FireListItem :fire="fire"></FireListItem>
+        </div>
+      </template>
+      <template v-else>
+        <div class="p-5 text-center">Loading Fire Data...</div>
+      </template>
 
     </div>
+
+    <div class="container mx-auto mt-5">
+      <div class="rounded overflow-hidden shadow-md my-5 bg-white p-5">
+        <div class="block">User is Idle: {{isIdle}}</div>
+        <div class="block">Device is Online: {{isOnline}}</div>
+        <div v-if="networkData.type !== 'unknown'" class="block">Network Type: {{networkData.type}}</div>
+        <div v-if="networkData.effectiveType" class="block">Speed Type: {{networkData.effectiveType}}</div>
+      </div>
+    </div>
+
     <nav class="flex items-center md:justify-start justify-center flex-wrap nav-color py-3 px-6 ">
       <div class="text-white mr-6 text-center">
         <small>&copy; Josh Mielke</small>
@@ -55,8 +67,15 @@
 
 <script>
 import FireListItem from "@/components/FireListItem";
-
+import { useIdle } from '@vueuse/core'
+import { useNetwork } from 'vue-use-web'
 export default {
+  setup() {
+    const { idle, lastActive } = useIdle(10 * 1000) // 10 Seconds
+    const { isOnline, offlineAt, downlink, downlinkMax, effectiveType, saveData, type } = useNetwork();
+
+    return { idle, isOnline, offlineAt, downlink, downlinkMax, effectiveType, saveData, type}
+  },
   name: 'Home',
   components: {
     FireListItem,
@@ -88,6 +107,7 @@ export default {
       try {
         const resp = await this.$axios.get('/api/');
         this.fires = resp.data.features;
+        this.updateTime = this.$moment().format('LT on MM/DD/YYYY');
       } catch (err) {
         // Handle Error Here
       }
@@ -97,6 +117,20 @@ export default {
     await this.fetchFires();
   },
   computed: {
+    isIdle() {
+      return this.idle;
+    },
+    networkData(){
+      return {
+        isOnline: this.isOnline,
+        offlineAt: this.offlineAt,
+        downlink: this.downlink,
+        downlinkMax: this.downlinkMax,
+        effectiveType: this.effectiveType,
+        saveData: this.saveData,
+        type: this.type
+      }
+    },
     filteredFires() {
       if (this.fires !== null) {
         let fireData = [];

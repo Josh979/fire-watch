@@ -20,8 +20,7 @@
       </div>
     </div>
 
-
-    <div class="container mx-auto mt-5">
+    <div class="container mx-auto mt-4">
       <div class="flex justify-center sm:justify-end justify">
         <div class=" gap-2 flex flex-col sm:flex-row w-full sm:w-auto">
           <div class="px-5 sm:px-0">
@@ -56,10 +55,11 @@
       </template>
 
     </div>
+    <div v-if="updateTime" class="text-gray-600 text-center text-sm mb-1">Data retrieved on {{updateTime}}</div>
 
 
 
-    <nav class="flex items-center md:justify-start justify-center flex-wrap nav-color py-3 px-6 ">
+    <nav class="flex items-center justify-center flex-wrap nav-color py-3 px-6 ">
       <div class="text-white mr-6 text-center">
         <small>&copy; Josh Mielke | v{{appVersion}}</small>
       </div>
@@ -110,7 +110,7 @@ export default {
         // this.reloadIcon = 'tree';
         const resp = await this.$axios.get('/api/');
         this.fires = resp.data.features;
-        this.updateTime = this.$moment().format('LT on MM/DD/YYYY');
+        this.updateTime = this.$moment().format('MM/DD/YY \\at LT');
         // this.reloadIcon = 'sync';
 
       } catch (err) {

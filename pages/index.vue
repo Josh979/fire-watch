@@ -5,7 +5,7 @@
         <span class="font-semibold text-xl tracking-tight"><font-awesome-icon icon="fire" class=""/> California Fire Watch</span>
       </div>
       <div @click="reloadFires">
-        <font-awesome-icon :class="reloading ? 'fa-spin' : ''" :icon="reloadIcon" class="text-white text-lg"/>
+        <font-awesome-icon :icon="reloadIcon" class="text-white text-lg"/>
       </div>
     </nav>
 
@@ -22,49 +22,69 @@
 
     <div class="container mx-auto mt-4">
       <div class="flex justify-center sm:justify-end justify">
-        <div class=" gap-2 flex flex-col sm:flex-row w-full sm:w-auto">
-          <div class="px-5 sm:px-0">
+        <div class=" gap-2 flex flex-row  w-full sm:w-auto">
+          <div class="px-5 sm:px-0 w-1/2">
             <label for="filter" class="block text-sm">Sort By</label>
-            <select id="filter" class="px-3 py-2 rounded shadow-sm text-gray-900 bg-white border-solid border-2 border-gray-300 w-full" v-model="filter">
-              <option value="IncidentName">Name</option>
-              <option value="TotalAcres">Acres Burned</option>
-              <option value="PercentContained">Percent Contained</option>
-              <option value="ModifiedOnDateTime">Last Updated</option>
-              <option value="FireDiscoveryDateTime">Start Date</option>
-            </select>
+            <div class="inline-block relative w-full">
+              <select v-model="filter" id="filter" class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 pr-8 rounded shadow leading-tight focus:border-red-800">
+                <option value="IncidentName">Name</option>
+                <option value="TotalAcres">Acres Burned</option>
+                <option value="PercentContained">Percent Contained</option>
+                <option value="ModifiedOnDateTime">Last Updated</option>
+                <option value="FireDiscoveryDateTime">Start Date</option>
+              </select>
+              <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                  <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
+                </svg>
+              </div>
+            </div>
           </div>
-          <div class="px-5 sm:px-0">
+
+          <div class="px-5 sm:px-0 w-1/2">
             <label for="order" class="block text-sm">Order</label>
-            <select id="order" class="px-3 py-2 rounded shadow-sm text-gray-900 bg-white border-solid border-2 border-gray-300 w-full" v-model="ascending">
-              <option :value="1">Ascending</option>
-              <option :value="0">Descending</option>
-            </select>
+            <div class="inline-block relative w-full">
+              <select id="order" v-model="ascending" class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 pr-8 rounded shadow leading-tight focus:border-red-800">
+                <option :value="1">Ascending</option>
+                <option :value="0">Descending</option>
+              </select>
+              <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                  <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
+                </svg>
+              </div>
+            </div>
+
           </div>
 
         </div>
       </div>
       <transition name="fade" mode="out-in">
-
-      <div class="md:text-left text-center pt-5 md:pt-auto" v-if="filteredFires">
-        <h1 class="text-2xl font-semibold">{{filteredFires.length}} Active Fires</h1>
-      </div>
-      </transition>
-      <template v-if="filteredFires" >
-        <div
-          v-for="(fire,index) in filteredFires"
-          :key="index"
-        >
-          <FireListItem :fire="fire"></FireListItem>
+        <div class="md:text-left text-center pt-5 md:pt-auto" v-if="filteredFires">
+          <h1 class="text-2xl font-semibold">{{filteredFires.length}} Active Fires</h1>
         </div>
-      </template>
-      <template v-else>
-        <div class="flex rounded overflow-hidden shadow-md my-5 bg-white">
-          <div class="px-6 py-4 flex-1">
+      </transition>
+      <transition-group name="fade" mode="out-in">
+          <div
+            v-if="filteredFires && !reloading"
+            v-for="(fire,index) in filteredFires"
+            :key="index"
+          >
+            <FireListItem :fire="fire"></FireListItem>
+          </div>
+      </transition-group>
 
-          <div class="p-5 text-center">Loading Fire Data...</div>
+      <div
+        v-if="!filteredFires || reloading"
+         class="flex rounded overflow-hidden shadow-md my-5 bg-white"
+      >
+        <div class="px-6 py-4 flex-1">
+          <div class="p-5 text-center">
+            <div class="mb-3 text-gray-800">Loading Fire Data...</div>
+            <font-awesome-icon :class="reloading ? 'fa-spin' : ''" icon="circle-notch" class="text-gray-800 text-3xl"/>
           </div>
         </div>
-      </template>
+      </div>
 
     </div>
 

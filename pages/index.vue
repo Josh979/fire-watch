@@ -5,7 +5,7 @@
         <span class="font-semibold text-xl tracking-tight"><font-awesome-icon icon="fire" class=""/> California Fire Watch</span>
       </div>
       <div @click="reloadFires">
-        <font-awesome-icon :icon="reloadIcon" class="text-white"/>
+        <font-awesome-icon :class="reloading ? 'fa-spin' : ''" :icon="reloadIcon" class="text-white text-lg"/>
       </div>
     </nav>
 
@@ -43,23 +43,32 @@
 
         </div>
       </div>
+      <transition name="fade" mode="out-in">
+
+      <div class="md:text-left text-center pt-5 md:pt-auto" v-if="filteredFires">
+        <h1 class="text-2xl font-semibold">{{filteredFires.length}} Active Fires</h1>
+      </div>
+      </transition>
       <template v-if="filteredFires" >
         <div
           v-for="(fire,index) in filteredFires"
-          v-if="fire.TotalAcres > 1 && fire.PercentPerimeterToBeContained === 100"
           :key="index"
         >
           <FireListItem :fire="fire"></FireListItem>
         </div>
       </template>
       <template v-else>
-        <div class="p-5 text-center">Loading Fire Data...</div>
+        <div class="flex rounded overflow-hidden shadow-md my-5 bg-white">
+          <div class="px-6 py-4 flex-1">
+
+          <div class="p-5 text-center">Loading Fire Data...</div>
+          </div>
+        </div>
       </template>
 
     </div>
+
     <div v-if="updateTime" class="text-gray-700 text-center text-sm mb-1">Data retrieved on {{updateTime}}</div>
-
-
 
     <nav class="flex items-center justify-center flex-wrap nav-color py-3 px-6 ">
       <div class="text-white mr-6 text-center">
@@ -82,6 +91,7 @@ export default {
     return {
       fires: null,
       reloadIcon: 'sync',
+      reloading: false,
       filter: 'IncidentName',
       ascending: 1,
       updateTime: null,
@@ -110,11 +120,15 @@ export default {
     },
     async fetchFires() {
       try {
+        this.reloading = true;
+
         // this.reloadIcon = 'tree';
         const resp = await this.$axios.get('/api/');
         this.fires = resp.data.features;
         this.updateTime = this.$moment().format('MM/DD/YY \\at LT');
         // this.reloadIcon = 'sync';
+        this.reloading = false;
+
 
       } catch (err) {
         // Handle Error Here
@@ -135,7 +149,9 @@ export default {
         this.fires.forEach((fire) => {
           fire.attributes.Geometry = fire.geometry;
           fire.attributes.TotalAcres = fire.attributes.DailyAcres || fire.attributes.CalculatedAcres || 0;
-          fireData.push(fire.attributes)
+          if (fire.attributes.TotalAcres > 1 && fire.attributes.PercentPerimeterToBeContained === 100){
+            fireData.push(fire.attributes)
+          }
         })
         return fireData.sort((a, b) => {
           let order = 1;
@@ -157,5 +173,14 @@ export default {
 <style>
 .nav-color {
   background: #9B1D1D;
+}
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: 0.5s;
 }
 </style>

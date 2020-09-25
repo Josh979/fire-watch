@@ -68,7 +68,7 @@
           <div
             v-if="filteredFires && !reloading"
             v-for="(fire,index) in filteredFires"
-            :key="index"
+            :key="index + 'FireListItemWrapper'"
           >
             <FireListItem :fire="fire"></FireListItem>
           </div>
